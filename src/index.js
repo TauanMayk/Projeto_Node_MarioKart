@@ -46,6 +46,13 @@ const player6 = {
   PONTOS: 0,
 };
 
+const players = [player1, player2, player3, player4, player5, player6];
+
+async function getRandomCharacter(players) {
+  const randomIndex = Math.floor(Math.random() * players.length);
+  return players[randomIndex];
+}
+
 async function rollDice() {
   return Math.floor(Math.random() * 6) + 1;
 }
@@ -207,6 +214,12 @@ async function declareWinner(character1, character2) {
     `🚨🏁 Corrida entre ${player1.NOME} e ${player2.NOME} começando...`
   );
 
-  await playRaceEngine(player1, player2);
-  await declareWinner(player1, player2);
+  await playRaceEngine(
+    await getRandomCharacter(players),
+    await getRandomCharacter(players),
+  );
+  await declareWinner(
+    await getRandomCharacter(players),
+    await getRandomCharacter(players),
+  );
 })();
